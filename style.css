@@ -1068,6 +1068,34 @@ body{
     background: #bdfd7e;
     transition: width 0.3s ease;
 }
+.fresh-footer::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+
+    background:
+        radial-gradient(circle, rgba(189,253,126,.35) 1px, transparent 2px),
+        radial-gradient(circle, rgba(255,200,120,.25) 1px, transparent 2px),
+        radial-gradient(circle, rgba(255,120,120,.20) 1px, transparent 2px);
+
+    background-size: 100px 100px, 150px 150px, 200px 200px;
+
+    animation: floatParticles 10s linear infinite;
+}
+@keyframes floatParticles {
+    0% {
+        background-position: 0 0, 50px 50px, 100px 100px;
+    }
+    50% {
+        background-position: -30px -20px, 70px 60px, 120px 110px;
+    }
+    100% {
+        background-position: 0 0, 50px 50px, 100px 100px;
+    }
+}
+
 
 .fresh-footer .footer-links a:hover::after {
     width: 100%;
