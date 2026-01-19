@@ -1093,26 +1093,50 @@ body{
     color: #bdfd7e;
 }
 
-
 .fresh-footer::before {
     content: '';
     position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle at center, rgba(189, 253, 126, 0.08) 0%, transparent 70%);
-    animation: waveMove 8s linear infinite;
+    inset: -80%;
+
+    background: radial-gradient(
+        circle at center,
+        rgba(189, 253, 126, 0.22) 0%,
+        rgba(189, 253, 126, 0.12) 35%,
+        transparent 70%
+    );
+
+    animation: waveGlow 5s ease-in-out infinite;
     pointer-events: none;
+    z-index: 0;
+}
+.fresh-footer * {
+    position: relative;
+    z-index: 1;
+}
+@media (max-width: 768px) {
+    .fresh-footer::before {
+        inset: -110%;
+        opacity: 1;
+    }
 }
 
-@keyframes waveMove {
-    0% { transform: rotate(0deg) translate(0,0); }
-    50% { transform: rotate(180deg) translate(10px, 10px); }
-    100% { transform: rotate(360deg) translate(0,0); }
+
+@keyframes waveGlow {
+    0% {
+        transform: translate(-20px, -20px) scale(1);
+        opacity: 0.6;
+    }
+    50% {
+        transform: translate(20px, 20px) scale(1.15);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-20px, -20px) scale(1);
+        opacity: 0.6;
+    }
 }
 
-/* متجاوب */
+
 @media (max-width: 768px) {
     .fresh-footer .row {
         text-align: center;
