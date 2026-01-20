@@ -429,3 +429,49 @@ container.innerHTML = storesData.map(store => `
         </div>
     </div>
 `).join('');
+// ===============================review message ===============================================
+
+const messages = [
+  { side:'left', img:'https://randomuser.me/api/portraits/women/44.jpg', text:'Hi, I just received my order 👋' },
+  { side:'right', img:'https://randomuser.me/api/portraits/men/32.jpg', text:'Great! How was everything?' },
+  { side:'left', img:'https://randomuser.me/api/portraits/women/44.jpg', text:'Very fresh and delicious 😍' },
+  { side:'right', img:'https://randomuser.me/api/portraits/men/32.jpg', text:'Happy to hear that 💚' },
+  { side:'left', img:'https://randomuser.me/api/portraits/women/44.jpg', text:'Fast delivery too 🚀' },
+  { side:'right', img:'https://randomuser.me/api/portraits/men/32.jpg', text:'Always on time 👍' }
+];
+
+const chat = document.querySelector('.tablet-chat');
+let index = 0;
+let started = false;
+
+
+function loadMessages() {
+    if(started) return; 
+    started = true;
+    const chatInterval = setInterval(() => {
+        if (index >= messages.length) return clearInterval(chatInterval);
+
+        const msg = document.createElement('div');
+        msg.className = `msg ${messages[index].side} visible`;
+        msg.innerHTML = `
+            <img src="${messages[index].img}">
+            <div class="bubble">${messages[index].text}</div>
+        `;
+        chat.appendChild(msg);
+        chat.scrollTop = chat.scrollHeight;
+        index++;
+    }, 1200);
+}
+
+
+const section = document.getElementById('reviewsSection');
+const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+        if(entry.isIntersecting){
+            loadMessages();
+            obs.unobserve(entry.target); 
+        }
+    });
+}, { threshold: 0.5 });
+
+observer.observe(section);
